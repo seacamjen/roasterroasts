@@ -6,8 +6,11 @@
 <h2><a href="$roaster.getWebsite()">$roaster.getWebsite()</a></h2>
 
 <h2>$roaster.getDescription()</h2>
-
+#if (!$roaster.getAverage())
+  <h2>Be the first to rate this Roaster!</h2>
+#else
 <h2>Average Rating: $roaster.getAverage()</h2>
+#end
 
 <ul>
   #foreach ($rating in $roaster.getRatings())
