@@ -44,7 +44,30 @@ public class App {
       model.put("roasters", Roaster.all());
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
+
+    get("/roasters/:id",(request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      Roaster roaster = Roaster.find(Integer.parseInt(request.params(":id")));
+      model.put("ratings", Rating.all());
+      model.put("roaster", roaster);
+      model.put("template", "templates/roaster.vtl");
+      model.put("roasters", Roaster.all());
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/roasters/:id", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      Roaster roaster = Roaster.find(Integer.parseInt(request.params(":id")));
+      String name = request.queryParams("name");
+      int rating = Integer.parseInt(request.queryParams("rating"));
+      String comment = request.queryParams("comment");
+      int roasterId = Integer.parseInt(request.queryParams("roasterId"));
+      Rating newRating = new Rating(roasterId, name, rating, comment);
+      newRating.save();
+      String url = String.format("/roasters/"+roaster.getId());
+      response.redirect(url);
+      model.put("roaster", roaster);
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
   }
-
-
 }

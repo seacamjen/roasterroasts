@@ -1,0 +1,42 @@
+<!--roaster.vtl-->
+<h1>$roaster.getName()</h1>
+
+<h2>$roaster.getLocation()</h2>
+
+<h2><a href="$roaster.getWebsite()">$roaster.getWebsite()</a></h2>
+
+<h2>$roaster.getDescription()</h2>
+
+<h2>Average Rating: $roaster.getAverage()</h2>
+
+<ul>
+  #foreach ($rating in $roaster.getRatings())
+  <li> <h4> $rating.getRater()</h4>
+    <ul>
+      <li>$rating.getRating()</li>
+      <li>$rating.getComment()</li>
+    </ul>
+  </li>
+  #end
+</ul>
+
+<form action="/roasters/$roaster.getId()" method="post">
+  <input id="roasterId" name="roasterId" type="hidden" value="$roaster.getId()">
+  <div class="form-group">
+    <label for="name">Enter Your Name:</label>
+    <input name="name" type="text" id="name" class = "form-control" required>
+  </div>
+  <div class="form-group">
+    <label for="rating">Rating:</label>
+    <input name="rating" type="number" id="rating" class = "form-control" required>
+  </div>
+  <div class="form-group">
+    <label for="comment">Comments:</label>
+    <input name="comment" type="text" id="comment" class = "form-control">
+  </div>
+
+  <button type="submit" class="btn btn-warning">Submit</button>
+</form>
+
+
+<!--roaster.vtl-->
