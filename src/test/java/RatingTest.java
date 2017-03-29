@@ -1,6 +1,7 @@
 import org.sql2o.*;
 import org.junit.*;
 import static org.junit.Assert.*;
+import java.util.List;
 
 public class RatingTest {
 
@@ -45,4 +46,38 @@ public class RatingTest {
     Rating testRating = new Rating(1, "name", 3, "super okay coffee");
     assertEquals("super okay coffee", testRating.getComment());
   }
+
+  @Test
+  public void all_returnsAllSavedRatings() {
+    Rating ratingOne = new Rating(1, "name", 3, "super okay coffee");
+    ratingOne.save();
+    Rating ratingTwo = new Rating(1, "names", 4, "super coffee");
+    ratingTwo.save();
+    assertTrue(Rating.all().get(0).equals(ratingOne));
+    assertTrue(Rating.all().get(1).equals(ratingTwo));
+  }
+
+  @Test
+  public void save_returnsTrueIfRatinsAreTheSame() {
+    Rating testRating = new Rating(1, "name", 3, "super okay coffee");
+    testRating.save();
+    assertTrue(Rating.all().get(0).equals(testRating));
+  }
+
+  @Test
+  public void getId_getRatingId_1() {
+    Rating testRating = new Rating(1, "name", 3, "super okay coffee");
+    testRating.save();
+    assertTrue(testRating.getId() > 0);
+  }
+
+  @Test
+  public void find_returnsRatingWithSameId_ratingTwo() {
+    Rating ratingOne = new Rating(1, "name", 3, "super okay coffee");
+    ratingOne.save();
+    Rating ratingTwo = new Rating(1, "names", 4, "super coffee");
+    ratingTwo.save();
+    assertEquals(Rating.find(ratingTwo.getId()), ratingTwo);
+  }
+
 }
