@@ -62,7 +62,7 @@ public class Rating {
       return false;
     } else {
       Rating newRating = (Rating) otherRating;
-      return this.getRater().equals(newRating.getRater());
+      return this.getRoasterId() == newRating.getRoasterId();
     }
   }
 
