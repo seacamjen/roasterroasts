@@ -213,7 +213,6 @@ COPY certs (id, name) FROM stdin;
 4	rainforest alliance
 5	smithsonian bird friendly
 6	utz
-7 none
 \.
 
 

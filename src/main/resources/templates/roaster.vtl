@@ -1,45 +1,64 @@
 <!--roaster.vtl-->
-<h1>$roaster.getName()</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-md-7">
+      <h1>$roaster.getName()
+        <span class="panelTitleRight">
+          #if (!$roaster.getAverage())
+            <h4>Be the first to rate this Roaster!</h4>
+          #else
+          <h4>Average Rating: $roaster.getAverage()</h4>
+          #end
+        </span>
+      </h1>
+      <h3>$roaster.getLocation()</h3>
+      <p><a href="$roaster.getWebsite()">$roaster.getWebsite()</a></p>
+      <h3>Roaster Description</h3>
+      <p>$roaster.getDescription()</p>
 
-<h2>$roaster.getLocation()</h2>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <h3>Rate $roaster.getName()</h3>
+          <form action="/roasters/$roaster.getId()" method="post">
+            <input id="roasterId" name="roasterId" type="hidden" value="$roaster.getId()">
+            <div class="form-group">
+              <label for="name">Enter Your Name:</label>
+              <input name="name" type="text" id="name" class = "form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="rating">Rating:</label>
+              <input name="rating" type="number" id="rating" class = "form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="comment">Comments:</label>
+              <input name="comment" type="text" id="comment" class = "form-control">
+            </div>
 
-<h2><a href="$roaster.getWebsite()">$roaster.getWebsite()</a></h2>
+            <button type="submit" class="btn btn-warning">Submit</button>
+          </form>
+        </div>
+      </div>
 
-<h2>$roaster.getDescription()</h2>
-#if (!$roaster.getAverage())
-  <h2>Be the first to rate this Roaster!</h2>
-#else
-<h2>Average Rating: $roaster.getAverage()</h2>
-#end
-
-<ul>
-  #foreach ($rating in $roaster.getRatings())
-  <li> <h4> $rating.getRater()</h4>
-    <ul>
-      <li>$rating.getRating()</li>
-      <li>$rating.getComment()</li>
-    </ul>
-  </li>
-  #end
-</ul>
-
-<form action="/roasters/$roaster.getId()" method="post">
-  <input id="roasterId" name="roasterId" type="hidden" value="$roaster.getId()">
-  <div class="form-group">
-    <label for="name">Enter Your Name:</label>
-    <input name="name" type="text" id="name" class = "form-control" required>
+    </div>
+    <div class="col-md-5">
+    #foreach ($rating in $roaster.getRatings())
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">$rating.getRater() <span class="panelTitleRight">Rating: $rating.getRating()</span></h3>
+        </div>
+        <div class="panel-body">
+          $rating.getComment()
+        </div>
+      </div> <!--end panel-->
+        #end
+    </div>
   </div>
-  <div class="form-group">
-    <label for="rating">Rating:</label>
-    <input name="rating" type="number" id="rating" class = "form-control" required>
-  </div>
-  <div class="form-group">
-    <label for="comment">Comments:</label>
-    <input name="comment" type="text" id="comment" class = "form-control">
-  </div>
 
-  <button type="submit" class="btn btn-warning">Submit</button>
-</form>
+</div>
+
+
+
+
 
 
 <!--roaster.vtl-->
