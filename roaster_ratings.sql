@@ -14,14 +14,14 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner:
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
 --
 
 CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 
 --
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner:
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
 --
 
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
@@ -213,6 +213,8 @@ COPY certs (id, name) FROM stdin;
 4	rainforest alliance
 5	smithsonian bird friendly
 6	utz
+7	none
+8	unknown
 \.
 
 
@@ -257,7 +259,7 @@ COPY ratings (id, roaster_id, rater, rating, comment) FROM stdin;
 -- Name: ratings_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('ratings_id_seq', 8, true);
+SELECT pg_catalog.setval('ratings_id_seq', 20, true);
 
 
 --
@@ -272,7 +274,7 @@ COPY roasters (id, name, location, cert_id, hood_id, website, description, avera
 -- Name: roasters_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('roasters_id_seq', 3, true);
+SELECT pg_catalog.setval('roasters_id_seq', 8, true);
 
 
 --
@@ -320,3 +322,4 @@ GRANT ALL ON SCHEMA public TO PUBLIC;
 --
 -- PostgreSQL database dump complete
 --
+
