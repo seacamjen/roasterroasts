@@ -1,16 +1,37 @@
 <!--roasters.vtl-->
-<h1>All Roasters</h1>
+<h1>All Roasters <span class="alignRight ratingh1">Rating</span></h1>
 
 #foreach ($roaster in $roasters)
   <a href="/roasters/$roaster.getId()" class="anchorWithOutStyle">
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">$roaster.getName()
-          <span class="alignRight">Rating:
+          <span class="alignRight">
             #if (!$roaster.getAverage())
             N/A
             #else
-             $roaster.getAverage()
+              #if($roaster.getAverage()> 4.5)
+                <img src="/img/whitebean.png" alt="little bean" width= "20px">
+                <img src="/img/whitebean.png" alt="little bean" width= "20px">
+                <img src="/img/whitebean.png" alt="little bean" width= "20px">
+                <img src="/img/whitebean.png" alt="little bean" width= "20px">
+                <img src="/img/whitebean.png" alt="little bean" width= "20px">
+              #elseif($roaster.getAverage()> 3.5)
+                <img src="/img/whitebean.png" alt="little bean" width= "20px">
+                <img src="/img/whitebean.png" alt="little bean" width= "20px">
+                <img src="/img/whitebean.png" alt="little bean" width= "20px">
+                <img src="/img/whitebean.png" alt="little bean" width= "20px">
+              #elseif($roaster.getAverage()> 2.5)
+                <img src="/img/whitebean.png" alt="little bean" width= "20px">
+                <img src="/img/whitebean.png" alt="little bean" width= "20px">
+                <img src="/img/whitebean.png" alt="little bean" width= "20px">
+              #elseif($roaster.getAverage()> 1.5)
+                <img src="/img/whitebean.png" alt="little bean" width= "20px">
+                <img src="/img/whitebean.png" alt="little bean" width= "20px">
+              #elseif($roaster.getAverage()> 0.5)
+                <img src="/img/whitebean.png" alt="little bean" width= "20px">
+              #else
+              #end
             #end
           </span>
         </h3>

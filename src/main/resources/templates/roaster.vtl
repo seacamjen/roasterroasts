@@ -7,7 +7,28 @@
           #if (!$roaster.getAverage())
             <h4>Be the first to rate this Roaster!</h4>
           #else
-          <h4>Average Rating: $roaster.getAverage()</h4>
+            #if($roaster.getAverage()> 4.5)
+              <img src="/img/bean.png" alt="little bean" width= "33px">
+              <img src="/img/bean.png" alt="little bean" width= "33px">
+              <img src="/img/bean.png" alt="little bean" width= "33px">
+              <img src="/img/bean.png" alt="little bean" width= "33px">
+              <img src="/img/bean.png" alt="little bean" width= "33px">
+            #elseif($roaster.getAverage()> 3.5)
+              <img src="/img/bean.png" alt="little bean" width= "33px">
+              <img src="/img/bean.png" alt="little bean" width= "33px">
+              <img src="/img/bean.png" alt="little bean" width= "33px">
+              <img src="/img/bean.png" alt="little bean" width= "33px">
+            #elseif($roaster.getAverage()> 2.5)
+              <img src="/img/bean.png" alt="little bean" width= "33px">
+              <img src="/img/bean.png" alt="little bean" width= "33px">
+              <img src="/img/bean.png" alt="little bean" width= "33px">
+            #elseif($roaster.getAverage()> 1.5)
+              <img src="/img/bean.png" alt="little bean" width= "33px">
+              <img src="/img/bean.png" alt="little bean" width= "33px">
+            #elseif($roaster.getAverage()> 0.5)
+              <img src="/img/bean.png" alt="little bean" width= "33px">
+            #else
+            #end
           #end
         </span>
       </h1>
@@ -31,8 +52,18 @@
               <input name="name" type="text" id="name" class = "form-control" required>
             </div>
             <div class="form-group">
-              <label for="rating">Rating:</label>
-              <input name="rating" type="number" id="rating" class = "form-control" required>
+              <label for="rating">Rate Roaster 1-5:</label>
+              <div class="range">
+                <input name = "rating" id = "rating" type="range" min="1" max="5" steps="1" value="3">
+              </div>
+
+              <ul class="range-labels">
+                <li><img src="/img/bean.png" alt="little bean" width= "20px"></li>
+                <li><img src="/img/bean.png" alt="little bean" width= "20px"></li>
+                <li class="active selected"><img src="/img/bean.png" alt="little bean" width= "20px"></li>
+                <li><img src="/img/bean.png" alt="little bean" width= "20px"></li>
+                <li><img src="/img/bean.png" alt="little bean" width= "20px"></li>
+              </ul>
             </div>
             <div class="form-group">
               <label for="comment">Comments:</label>
@@ -43,13 +74,37 @@
           </form>
         </div>
       </div>
-
     </div>
     <div class="col-md-5">
     #foreach ($rating in $roaster.getRatings())
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="panel-title">$rating.getRater() <span class="alignRight">Rating: $rating.getRating()</span></h3>
+          <h3 class="panel-title">$rating.getRater()
+            <span class="alignRight">
+              #if($rating.getRating()> 4.5)
+                <img src="/img/whitebean.png" alt="little bean" width= "20px">
+                <img src="/img/whitebean.png" alt="little bean" width= "20px">
+                <img src="/img/whitebean.png" alt="little bean" width= "20px">
+                <img src="/img/whitebean.png" alt="little bean" width= "20px">
+                <img src="/img/whitebean.png" alt="little bean" width= "20px">
+              #elseif($rating.getRating()> 3.5)
+                <img src="/img/whitebean.png" alt="little bean" width= "20px">
+                <img src="/img/whitebean.png" alt="little bean" width= "20px">
+                <img src="/img/whitebean.png" alt="little bean" width= "20px">
+                <img src="/img/whitebean.png" alt="little bean" width= "20px">
+              #elseif($rating.getRating()> 2.5)
+                <img src="/img/whitebean.png" alt="little bean" width= "20px">
+                <img src="/img/whitebean.png" alt="little bean" width= "20px">
+                <img src="/img/whitebean.png" alt="little bean" width= "20px">
+              #elseif($rating.getRating()> 1.5)
+                <img src="/img/whitebean.png" alt="little bean" width= "20px">
+                <img src="/img/whitebean.png" alt="little bean" width= "20px">
+              #elseif($rating.getRating()> 0.5)
+                <img src="/img/whitebean.png" alt="little bean" width= "20px">
+              #else
+              #end
+            </span>
+          </h3>
         </div>
         <div class="panel-body">
           $rating.getComment()
@@ -120,6 +175,4 @@
     </div>
   </div>
 </div>
-
 <!--roaster.vtl-->
-<!-- placeholder = "$rating.getId()" -->
