@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-md-7">
       <h1>$roaster.getName()
-        <span class="panelTitleRight">
+        <span class="alignRight">
           #if (!$roaster.getAverage())
             <h4>Be the first to rate this Roaster!</h4>
           #else
@@ -36,7 +36,7 @@
             </div>
             <div class="form-group">
               <label for="comment">Comments:</label>
-              <input name="comment" type="text" id="comment" class = "form-control">
+              <textarea rows ="5" name="comment" type="text" id="comment" class = "form-control"></textarea>
             </div>
 
             <button type="submit" class="btn btn-warning">Submit</button>
@@ -49,12 +49,12 @@
     #foreach ($rating in $roaster.getRatings())
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="panel-title">$rating.getRater() <span class="panelTitleRight">Rating: $rating.getRating()</span></h3>
+          <h3 class="panel-title">$rating.getRater() <span class="alignRight">Rating: $rating.getRating()</span></h3>
         </div>
         <div class="panel-body">
           $rating.getComment()
           <br>
-          <button id="update-btn" type="button" class="btn btn-warning" data-toggle="modal" data-target="#updateRatingComment-$rating.getId()">Update Comment</button>
+          <button id="update-btn" type="button" class="btn btn-warning btn-xs alignRight" data-toggle="modal" data-target="#updateRatingComment-$rating.getId()">Update Comment</button>
         </div>
       </div> <!--end panel-->
 
@@ -71,6 +71,7 @@
                 <input id="ratingId" name="ratingId" type="hidden" value="$rating.getId()">
                 <label for="comment">New Comment:</label><br>
                 <textarea id="comment" name="comment" type="text" rows="5" class="form-control">$rating.getComment()</textarea>
+                <br>
                 <button type="submit" class="btn btn-info">Update</button>
               </form>
             </div>
@@ -84,11 +85,41 @@
         #end
     </div>
   </div>
+  <div class="row">
+    <button id="update-btn" type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteRoaster">Delete Roaster</button>
+  </div>
 
 </div>
 
 
+<div id="deleteRoaster" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Delete Roaster</h4>
+      </div>
+      <div class="modal-body">
+        <h5>Are you sure you want to delete $roaster.getName()? </h5>
+        <br>
+        <p>
+          This will be a permanent change. Roaster cannot be restored.
+        </p>
+        <br>
+        </br>
 
+      </div>
+      <div class="modal-footer">
+        <form action="/roasters/$roaster.getId()/delete" method="post" class="alignRight">
+
+          <button type="submit" class="btn btn-danger">Delete $roaster.getName()</button>
+          <button type="button" class="btn btn-success" data-dismiss="modal">Go Back</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!--roaster.vtl-->
 <!-- placeholder = "$rating.getId()" -->

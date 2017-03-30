@@ -84,12 +84,15 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-    // get("/roasters/:id/update", (request, response) -> {
-    //   Map<String, Object> model = new HashMap<String, Object>();
-    //   Roaster roaster = Roaster.find(Integer.parseInt(request.params(":id")));
-    //   model.put("roaster", roaster);
-    //   model.put("template", "templates/update-comment-success.vtl");
-    //   return new ModelAndView(model, layout);
-    // }, new VelocityTemplateEngine());
+    post("/roasters/:id/delete", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      Roaster roaster = Roaster.find(Integer.parseInt(request.params(":id")));
+      roaster.delete();
+      String url = String.format("/roasters");
+      response.redirect(url);
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+
   }
 }

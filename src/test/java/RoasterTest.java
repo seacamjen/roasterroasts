@@ -118,4 +118,14 @@ public class RoasterTest {
     Rating[] ratings = new Rating[] {ratingOne, ratingTwo};
     assertTrue(myRoasterOne.getRatings().containsAll(Arrays.asList(ratings)));
   }
+
+  @Test
+  public void delete_deleteRoasterWithSameId_true(){
+    Roaster myRoasterOne = new Roaster ("Coffee Stains", "Main St", 1, 1, "coffiestains.com", "delicious coffee");
+    myRoasterOne.save();
+    int myRoasterId = myRoasterOne.getId();
+    myRoasterOne.delete();
+    assertEquals(null, Roaster.find(myRoasterId));
+  }
+
 }
