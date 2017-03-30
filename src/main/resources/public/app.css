@@ -1,3 +1,7 @@
 .panelTitleRight {
   float: right;
 }
+.anchorWithOutStyle, .anchorWithOutStyle:hover {
+  text-decoration: none;
+  color: inherit;
+}

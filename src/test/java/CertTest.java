@@ -9,12 +9,11 @@ public class CertTest {
     DB.sql2o = new Sql2o("jdbc:postgresql://localhost:5432/roaster_ratings_test", null, null);
   }
 
-  @After
-  public void tearDown() {
-    try (Connection con = DB.sql2o.open()) {
-      String sql = "DELETE FROM name_of_your_table *;";
-      con.createQuery(sql).executeUpdate();
-    }
+  @Test
+  public void find_findsNameGivenID_true() {
+    assertEquals("organic", Cert.find(1));
   }
+
+
 
 }

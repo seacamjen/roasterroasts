@@ -75,4 +75,14 @@ public class Rating {
       return rating;
     }
   }
+
+  public void update(String comment) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "UPDATE ratings SET comment = :comment WHERE id = :id;";
+      con.createQuery(sql)
+      .addParameter("comment", comment)
+      .addParameter("id", id)
+      .executeUpdate();
+    }
+  }
 }

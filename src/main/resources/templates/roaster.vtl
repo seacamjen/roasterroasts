@@ -12,6 +12,11 @@
         </span>
       </h1>
       <h3>$roaster.getLocation()</h3>
+      #foreach ($cert in $certs)
+        #if ($cert.getId() == $roaster.getCertId())
+          <h4>Certifications: $cert.getName()</h4>
+        #end
+      #end
       <p><a href="$roaster.getWebsite()">$roaster.getWebsite()</a></p>
       <h3>Roaster Description</h3>
       <p>$roaster.getDescription()</p>
@@ -48,8 +53,34 @@
         </div>
         <div class="panel-body">
           $rating.getComment()
+          <br>
+          <button id="update-btn" type="button" class="btn btn-warning" data-toggle="modal" data-target="#updateRatingComment-$rating.getId()">Update Comment</button>
         </div>
       </div> <!--end panel-->
+
+      <div id="updateRatingComment-$rating.getId()" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Update Comment</h4>
+            </div>
+            <div class="modal-body">
+              <form action="/roasters/$roaster.getId()/update/$rating.getId()" method="post">
+                <input id="ratingId" name="ratingId" type="hidden" value="$rating.getId()">
+                <label for="comment">New Comment:</label><br>
+                <textarea id="comment" name="comment" type="text" rows="5" class="form-control">$rating.getComment()</textarea>
+                <button type="submit" class="btn btn-info">Update</button>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
         #end
     </div>
   </div>
@@ -59,6 +90,5 @@
 
 
 
-
-
 <!--roaster.vtl-->
+<!-- placeholder = "$rating.getId()" -->

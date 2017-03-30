@@ -80,4 +80,12 @@ public class RatingTest {
     assertEquals(Rating.find(ratingTwo.getId()), ratingTwo);
   }
 
+  @Test
+  public void update_updatesRatingComment_true() {
+   Rating testRating = new Rating(1, "name", 3, "super okay coffee");
+   testRating.save();
+   testRating.update("Awesome Coffee");
+   assertEquals("Awesome Coffee", Rating.find(testRating.getId()).getComment());
+  }
+
 }

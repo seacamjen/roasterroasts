@@ -26,4 +26,14 @@ public class Hood {
     }
   }
 
+  public static String find(int id){
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT name FROM hoods WHERE id = :id;";
+      String name = con.createQuery(sql)
+        .addParameter("id", id)
+        .executeScalar(String.class);
+      return name;
+    }
+  }
+
 }

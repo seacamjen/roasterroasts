@@ -1,7 +1,33 @@
 <!--roasters.vtl-->
 <h1>All Roasters</h1>
-  <ul>
-#foreach($roaster in $roasters)
-<li><a href="/roasters/$roaster.getId()">$roaster.getName()</a></li>
-#end
-  </ul>
+
+#foreach ($roaster in $roasters)
+  <a href="/roasters/$roaster.getId()" class="anchorWithOutStyle">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">$roaster.getName()
+          <span class="panelTitleRight">Rating:
+            #if (!$roaster.getAverage())
+            N/A
+            #else
+             $roaster.getAverage()
+            #end
+          </span>
+        </h3>
+      </div>
+      <div class="panel-body">
+        <p>
+          <strong>$roaster.getLocation()</strong>
+          <br>
+          $roaster.getDescription()
+          <br>
+          #foreach ($cert in $certs)
+            #if ($cert.getId() == $roaster.getCertId())
+              <strong>Certifications: $cert.getName()</strong>
+            #end
+          #end
+        </p>
+      </div>
+    </div> <!--end panel-->
+  </a>
+    #end
